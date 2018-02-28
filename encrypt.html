@@ -1,0 +1,62 @@
+<html>
+<head>
+  <meta charset="utf-8">
+    <title>Login</title>
+	<link rel="stylesheet" href="css/encryptcss.css">
+<style></style>
+</head>
+<body>
+    <form action="encrypt.php" method="post" enctype="multipart/form-data" > 
+			<div class="inset">
+			<table border="0"><tr>
+				<td><label for="sendto" >Send to</label></td>
+				<td><input type="text" name="sendto" id="sendto" required></td>
+			</tr>
+			<tr>
+				<td><input class="jscolor {onFineChange:'update(this)'}" value="FFFFFF" required></td>
+				<td><input type="text" name="R" id="R" placeholder="R value"></td>
+				<td><input type="text" name="G" id="G" placeholder="G value"></td>
+				<td><input type="text" name="B" id="B" placeholder="B value"></td>
+			</tr>
+			<tr>
+				<td><input type="file" name="file" id="file" onchange="fun();"></td>
+				<td><input type="text" name="ascii1" id="fileascii1"></td>
+				<td><input type="text" name="ascii2" id="fileascii2"></td>
+				<td><input type="text" name="ascii3" id="fileascii3"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="go" id="go" value="Encrypt"></td>
+			</tr>
+			</table>
+			</div>
+	</form>
+<script src="js/jscolor.js"></script>
+<script>
+var b1,b2,b3;
+function update(picker) {
+    document.getElementById('R').value =
+        Math.round(picker.rgb[0]);
+	document.getElementById('G').value =
+        Math.round(picker.rgb[1]);
+	document.getElementById('B').value=
+        Math.round(picker.rgb[2]);
+}
+function fun(){
+			var fullPath = document.getElementById('file').value;
+			if (fullPath) {
+				var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+				var filename = fullPath.substring(startIndex);
+				if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+					filename = filename.substring(1);
+				}
+			}
+			b1=filename.charCodeAt(0);
+			document.getElementById('fileascii1').value =Math.round(b1);
+			b2=filename.charCodeAt(1);
+			document.getElementById('fileascii2').value =Math.round(b2);
+			b3=filename.charCodeAt(2);
+			document.getElementById('fileascii3').value =Math.round(b3);
+		}
+	</script>
+</body>
+</html>
